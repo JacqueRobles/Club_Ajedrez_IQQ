@@ -31,6 +31,10 @@
           <li class="nav-item">
             <a class="nav-link active" href="#" tabindex="-1" aria-disabled="true">Torneo</a>
           </li>
+        </li>
+        <li class="nav-item">
+          <button id="darkModeToggle">Toggle Dark Mode</button>
+        </li>
         </ul>
       </div>
     </div>
@@ -239,7 +243,13 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous">
+</script>
+
+<script>
+  window.darkMode = @json($darkMode);
+</script>
+<script src="/resources/js/app.js"></script>
 
 
 </body>
