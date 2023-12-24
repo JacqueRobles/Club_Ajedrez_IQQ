@@ -14,4 +14,8 @@ export default defineConfig({
             ],
         }),
     ],
+    css: {
+        postcss: { plugins: require('postcss.config.js').plugins },
+    },
+
 });
