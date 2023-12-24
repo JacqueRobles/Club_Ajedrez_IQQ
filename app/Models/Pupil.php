@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Pupil extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'id_fide',
+        'city',
+        'street',
+        'street_num',
+        'elo',
+
+    ];
+
+
 }

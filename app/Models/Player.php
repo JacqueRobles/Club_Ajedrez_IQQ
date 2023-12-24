@@ -10,14 +10,12 @@ class player extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'surname',
-        'rut',
-        'v_digit',
-        'phone',
-        'state',
+
+        'city',
+        'street',
+        'num_street',
+        'elo',
+
     ];
 
 }
