@@ -12,10 +12,6 @@ class Directive extends User
     use HasRoles;
 
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-
     ];
 
     public function user()

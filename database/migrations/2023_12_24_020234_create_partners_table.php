@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('partners', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('city');
+            $table->string('street');
+            $table->integer('street_num');
+            $table->date('inscription_date');
         });
     }
 

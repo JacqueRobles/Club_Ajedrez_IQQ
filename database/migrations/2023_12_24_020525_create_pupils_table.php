@@ -14,6 +14,11 @@ return new class extends Migration
         Schema::create('pupils', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->integer('id_fide')->unique();
+            $table->string('city');
+            $table->string('street');
+            $table->integer('street_num');
+            $table->integer('elo');
             $table->foreignId('user_id')->unique()->onDelete('cascade');
         });
     }
