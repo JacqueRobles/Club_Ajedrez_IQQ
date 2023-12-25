@@ -65,8 +65,8 @@ class FeeController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => 'required|max:255',
-            'amount' => 'required|numeric',
+            'name' => 'required|max:255',          //change
+            'amount' => 'required|numeric',         //change
         ]);
 
         $fee = Fee::findOrFail($id);

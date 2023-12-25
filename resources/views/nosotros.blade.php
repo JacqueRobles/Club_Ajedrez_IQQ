@@ -1,7 +1,5 @@
-
-@section('content')
-    <h2>Nosotros Page</h2>
-
+<!DOCTYPE html>
+<html lang="en">
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,7 +66,7 @@
               valiosas lecciones y habilidades adquiridas en cada partida, enriqueciendo así sus vidas y comunidades.</p>
           </div>
           <div class="col-md-6 my-5 pt-4 ">
-            <img src="img/nosotros1.jpg" alt="Tu Imagen" class="img-fluid float-right rounded float-end " width="300"
+            <img src="img/nosotros1.jpg" alt="nosotros 1" class="img-fluid float-right rounded float-end " width="300"
               height="300">
           </div>
         </div>
@@ -84,6 +82,5 @@
     
 
 
-    @endsection
-
+</html>
  <!-- <img class="img-fluid" src="img/nosotros.jpg" alt="" width="400" height="400"> -->

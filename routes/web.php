@@ -31,4 +31,4 @@ Route::middleware([
 });
 
 
-Route::get('/nosotros', [NosotrosController::class, 'index'])->name('nosotros');
+Route::get('/nosotros', [NosotrosController::class, '__invoke'])->name('nosotros');
