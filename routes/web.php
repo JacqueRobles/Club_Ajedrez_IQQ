@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\NosotrosController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,3 +29,6 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+
+Route::get('/nosotros', [NosotrosController::class, 'index'])->name('nosotros');

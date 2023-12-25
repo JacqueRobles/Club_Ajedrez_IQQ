@@ -14,8 +14,8 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #f2f3f3;">
     <div class="container-fluid">
-      <img src="img/oficial.png" alt="" width="100" height="60" class="d-inline-block align-text-top">
-      <p>club de iquique</p>
+      <img src="img/oficial.png" href="#" alt="" width="100" height="60" class="d-inline-block align-text-top">
+      <h6>club de iquique</h6>
       {{-- <button id="darkModeToggle">Toggle Dark Mode</button> --}}
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +27,7 @@
             <a class="nav-link active" aria-current="page" href="#">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/nosotros.html">nosotros</a>
+            <a class="nav-link active" href="{{ url('/nosotros') }}">nosotros</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="#" tabindex="-1" aria-disabled="true">Torneo</a>
