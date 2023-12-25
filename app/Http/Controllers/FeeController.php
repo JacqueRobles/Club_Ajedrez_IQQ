@@ -30,13 +30,17 @@ class FeeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|max:255',
             'amount' => 'required|numeric',
+            'period' => 'required|string',
+            'state' => 'required|string',
         ]);
 
         $fee = new Fee();
-        $fee->name = $request->input('name');
+        $fee->pay_date = now();
         $fee->amount = $request->input('amount');
+        $fee->period = $request->input('peiod');
+        $fee->state = $request->input('state');
+
         $fee->save();
 
         return redirect()->route('fees.index')->with('success', 'Fee created successfully');

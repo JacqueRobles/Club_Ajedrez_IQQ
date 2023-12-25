@@ -14,6 +14,18 @@ return new class extends Migration
         Schema::create('tournaments', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('city');
+            $table->string('format');
+            $table->date('date');
+            $table->integer('game_rythm');
+            $table->string('description');
+            $table->string('inscriptions');
+            $table->string('category');
+            $table->string('prizes');
+            $table->string('contact');
+            $table->string('general_referee');
+            $table->string('organizer');
+            $table->integer('quotas');
         });
     }
 

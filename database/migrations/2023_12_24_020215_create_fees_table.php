@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('fees', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->dateTime('pay_date');
+            $table->integer('amount');
+            $table->string('period');
+            $table->string('state');
         });
     }
 

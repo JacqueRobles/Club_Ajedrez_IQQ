@@ -17,10 +17,10 @@ class tournament extends Model
         'description',
         'inscriptions',
         'category',
-        'awards',
+        'prizes',
         'contact',
         'general_referee',
-        'organice',
+        'organizer',
         'quotas'
     ];
 
