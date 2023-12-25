@@ -27,6 +27,13 @@ class UserController extends Controller
         // Validate the request data
         $request->validate([
             // Add your validation rules here
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'surname' => 'required|string',
+            'rut' => 'required|string',
+            'v_digit' => 'required|string',
+            'phone' => 'required|string',
+            'state' => 'required|string',
         ]);
     
         // Create the User
