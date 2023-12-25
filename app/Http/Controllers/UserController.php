@@ -24,12 +24,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        // Check if the authenticated user is a directive
-        if (!(Auth::user()->userable instanceof Directive)) {
-            // Return an error response
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
-
         // Validate the request data
         $request->validate([
             // Add your validation rules here
@@ -37,44 +31,53 @@ class UserController extends Controller
 
         // Determine the type of user being created
         switch ($request->input('user_type')) {
-            case 'directive':
-                $userable = Directive::create($request->only([
-                    // List the directive attributes here
-                ]));
-                break;
-            case 'partner':
-                $userable = Partner::create($request->only([
-                    // List the partner attributes here
-                ]));
-                break;
-            case 'director':
-                $userable = Director::create($request->only([
-                    // List the director attributes here
-                ]));
-                break;
-            case 'pupil':
-                $userable = Pupil::create($request->only([
-                    // List the pupil attributes here
-                ]));
-                break;
             case 'player':
                 $userable = Player::create($request->only([
                     // List the player attributes here
                 ]));
                 break;
             default:
-                // Handle invalid user type
+                // Check if the authenticated user is a directive
+                if (!(Auth::user()->userable instanceof Directive)) {
+                    // Return an error response
+                    return response()->json(['error' => 'Unauthorized'], 403);
+                }
+
+                switch ($request->input('user_type')) {
+                    case 'directive':
+                        $userable = Directive::create($request->only([
+                            // List the directive attributes here
+                        ]));
+                        break;
+                    case 'partner':
+                        $userable = Partner::create($request->only([
+                            // List the partner attributes here
+                        ]));
+                        break;
+                    case 'director':
+                        $userable = Director::create($request->only([
+                            // List the director attributes here
+                        ]));
+                        break;
+                    case 'pupil':
+                        $userable = Pupil::create($request->only([
+                            // List the pupil attributes here
+                        ]));
+                        break;
+                    default:
+                        // Handle invalid user type
+                        break;
+                }
                 break;
-        }
+    }
 
-        // Create the User
-        $user = User::create(array_merge($request->only([
-            // List the user attributes here
-        ]), [
-            'userable_id' => $userable->id,
-            'userable_type' => get_class($userable)
-        ]));
-
+    // Create the User
+    $user = User::create(array_merge($request->only([
+        // List the user attributes here
+    ]), [
+        'userable_id' => $userable->id,
+        'userable_type' => get_class($userable)
+    ]));
         // Redirect or return a response
         // Return the created User
         return response()->json($user, 201);
