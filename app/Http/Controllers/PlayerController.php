@@ -36,23 +36,23 @@ class PlayerController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    $data = $request->validate([
-        'name' => 'required|string',
-        'email' => 'required|email|unique:users',
-        'surname' => 'required|string',
-        'rut' => 'required|string',
-        'v_digit' => 'required|string',
-        'phone' => 'required|string',
-        'state' => 'required|string',
-        'age' => 'required|integer',
-    ]);
+    {
+        $data = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'surname' => 'required|string',
+            'rut' => 'required|string',
+            'v_digit' => 'required|string',
+            'phone' => 'required|string',
+            'state' => 'required|string',
+            'age' => 'required|integer',
+        ]);
 
-    // Create the User and Player
-    $user = $this->userService->createUser($data, 'player');
+        // Create the User and Player
+        $user = $this->userService->createUser($data, 'player');
 
-    return redirect()->route('index', $user->userable->id);
-}
+        return redirect()->route('index', $user->userable->id);
+    }
     /**
      * Display the specified resource.
      */
@@ -80,7 +80,7 @@ class PlayerController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email,' . $id,
             'surname' => 'required|string',
-            'rut' => 'required|string',
+            'rut' => 'required|int',
             'v_digit' => 'required|string',
             'phone' => 'required|string',
             'state' => 'required|string',
