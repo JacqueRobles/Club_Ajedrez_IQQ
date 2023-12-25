@@ -30,13 +30,17 @@ class PartnerController extends Controller
     public function store(Request $request)
 {
     $request->validate([
-        'name' => 'required|max:255',
-        'email' => 'required|email|max:255',
+        'inscription_date' => 'required|date',
+        'city' => 'required|max:255',
+        'street' => 'required|max:255',
+        'street_num' => 'required|max:255',
     ]);
 
     $partner = new Partner();
-    $partner->name = $request->input('name');
-    $partner->email = $request->input('email');
+    $partner->inscription_date = $request->input('inscription_date');
+    $partner->city = $request->input('city');
+    $partner->street = $request->input('street');
+    $partner->street_num = $request->input('street_num');
     $partner->save();
 
     return redirect()->route('partners.index')->with('success', 'Partner created successfully');
