@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Club Ajedrez Iquique</title>
   <link rel="stylesheet" href="https://unpkg.com/@popperjs/core@2">
   <link rel="stylesheet" href="styles.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -16,6 +16,7 @@
     <div class="container-fluid">
       <img src="img/oficial.png" alt="" width="100" height="60" class="d-inline-block align-text-top">
       <p>club de iquique</p>
+      {{-- <button id="darkModeToggle">Toggle Dark Mode</button> --}}
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -33,7 +34,7 @@
           </li>
         </li>
         <li class="nav-item">
-          <button id="darkModeToggle">Toggle Dark Mode</button>
+          
         </li>
         </ul>
       </div>
@@ -53,22 +54,22 @@
         <div class="carousel-item active">
           <img src="img/club.jpg" class="d-block w-100 fixed-size-image" alt="...">
           <div class="carousel-caption d-none d-md-block">
-            <h5>HELLO WORD</h5>
-            <p>Lorem ipsum dolor sit amet consectetur.</p>
+            {{-- <h5>HELLO WORD</h5>
+            <p>Lorem ipsum dolor sit amet consectetur.</p> --}}
           </div>
         </div>
         <div class="carousel-item">
           <img src="img/club1.jpg" class="d-block w-100 fixed-size-image" alt="...">
           <div class="carousel-caption d-none d-md-block">
-            <h5>HELLO WORD</h5>
-            <p>Lorem ipsum dolor sit amet consectetur.</p>
+            {{-- <h5>HELLO WORD</h5>
+            <p>Lorem ipsum dolor sit amet consectetur.</p> --}}
           </div>
         </div>
         <div class="carousel-item">
           <img src="img/2.jpg" class="d-block w-100 fixed-size-image" alt="...">
           <div class="carousel-caption d-none d-md-block">
-            <h5>HELLO WORD</h5>
-            <p>Lorem ipsum dolor sit amet consectetur.</p>
+            {{-- <h5>HELLO WORD</h5>
+            <p>Lorem ipsum dolor sit amet consectetur.</p> --}}
           </div>
         </div>
       </div>
@@ -246,9 +247,7 @@
     crossorigin="anonymous">
 </script>
 
-<script>
-  window.darkMode = @json($darkMode);
-</script>
+
 <script src="/resources/js/app.js"></script>
 
 
