@@ -65,4 +65,19 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    public function directive()
+    {
+        return $this->morphOne(Directive::class, 'directiveable');
+    }
+
+
+    public function userable()
+    {
+        return $this->morphTo();
+    }
+
+
+
 }
+
+

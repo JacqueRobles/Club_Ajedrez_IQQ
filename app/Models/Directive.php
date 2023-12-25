@@ -18,4 +18,9 @@ class Directive extends User
 
     ];
 
+    public function user()
+    {
+        return $this->morphOne(User::class, 'userable');
+    }
+
 }

@@ -15,5 +15,9 @@ class Director extends Model
         'password',
     ];
 
+    public function user()
+    {
+        return $this->morphOne(User::class, 'userable');
+    }
 
 }

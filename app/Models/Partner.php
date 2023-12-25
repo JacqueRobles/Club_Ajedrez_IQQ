@@ -16,4 +16,9 @@ class Partner extends Model
         'inscription_date',
     ];
 
+    public function user()
+    {
+        return $this->morphOne(User::class, 'userable');
+    }
+
 }
