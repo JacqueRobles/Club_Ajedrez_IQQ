@@ -24,7 +24,7 @@ class DirectiveController extends Controller
     public function create()
     {
         // Return the view for creating a new directive
-        return view('directives.create');
+        return view('directives.create')->render();
     }
     /**
      * Store a newly created resource in storage.
