@@ -3,10 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\UserService;
 use app\Models\Directive;
 
 class DirectiveController extends Controller
 {
+    protected $userService; 
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    
+        $this->middleware(['role:directive', 'role:admin'])->only(['create', 'store', 'update', 'edit', 'destroy']);  //admin o no admin?
+
+    }
     /**
      * Display a listing of the resource.
      */
@@ -36,17 +45,13 @@ class DirectiveController extends Controller
             'name' => 'required|string',
             'email' => 'required|email',
             'address' => 'required|string',
+            'password' => 'required|string', // Assuming you want to set a password for the User
+            // Add validation rules for the additional attributes here
         ]);
-
-        // Create a new directive instance
-        $directive = new Directive();
-        $directive->name = $validatedData['name'];
-        $directive->email = $validatedData['email'];
-        $directive->address = $validatedData['address'];
-
-        // Save the directive to the database
-        $directive->save();
-
+    
+        // Use the UserService to create a new Directive and associated User
+        $directive = $this->userService->createUser($validatedData, 'directive');
+    
         // Return a success response
         return response()->json(['message' => 'Directive created successfully']);
     }
@@ -110,15 +115,24 @@ class DirectiveController extends Controller
             'name' => 'required|string',
             'email' => 'required|email',
             'address' => 'required|string',
+            // Add validation rules for the additional attributes here
+            'additional_attribute' => 'required',
         ]);
 
-        // Update the directive with the validated data
-        $directive->name = $validatedData['name'];
-        $directive->email = $validatedData['email'];
-        $directive->address = $validatedData['address'];
+        // Extract the user attributes
+        $userAttributes = [
+            'email' => $validatedData['email'],
+            // Add more user attributes here if needed
+        ];
 
-        // Save the updated directive to the database
-        $directive->save();
+        // Remove the user attributes from the original attributes array
+        unset($validatedData['email']);
+
+        // Update the User associated with the Directive
+        $directive->user->update($userAttributes);
+
+        // Update the Directive with the validated data
+        $directive->update($validatedData);
 
         // Return a success response
         return response()->json(['message' => 'Directive updated successfully']);

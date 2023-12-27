@@ -13,6 +13,16 @@ class UserService
 {
     public function createUser(array $attributes, string $userType)
     {
+        // Extract the user attributes
+        $userAttributes = [
+            'email' => $attributes['email'],
+            'password' => $attributes['password'],
+            // Add more user attributes here if needed
+        ];
+
+            // Remove the user attributes from the original attributes array
+        unset($attributes['email'], $attributes['password']);
+
         // Determine the type of user being created
         switch ($userType) {
             case 'directive':
@@ -36,11 +46,10 @@ class UserService
         }
 
         // Create the User
-        $user = User::create([
+        $user = User::create(array_merge($userAttributes, [
             'userable_id' => $userable->id,
             'userable_type' => get_class($userable),
-            // Add other user attributes here
-        ]);
+        ]));
 
         // Assign the role to the user
         $role = Role::where('name', $userType)->first();
