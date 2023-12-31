@@ -19,10 +19,10 @@ class UserService
             'password' => $attributes['password'],
             // Add more user attributes here if needed
         ];
-
-            // Remove the user attributes from the original attributes array
+        // Remove the user attributes from the original attributes array
         unset($attributes['email'], $attributes['password']);
 
+        
         // Determine the type of user being created
         switch ($userType) {
             case 'directive':

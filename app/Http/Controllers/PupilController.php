@@ -5,16 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Pupil;
+use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 
 class PupilController extends Controller
 {
     protected $userService; 
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
-    
+    public function __construct()
+    {    
         $this->middleware('role:directive')->only(['create', 'store']);
 
     }
@@ -24,7 +23,8 @@ class PupilController extends Controller
      */
     public function index()
     {
-        $pupils = Pupil::all();
+        $pupils = User::role('pupil')->get();
+    
         return view('pupil.index', compact('pupils'));
     }
 
@@ -41,21 +41,28 @@ class PupilController extends Controller
      */
     public function store(Request $request)
     {
-            $data = $request->validate([
-                'id_fide' => 'required|int',
-                'city' => 'required|string',
-                'street' => 'required|string',
-                'street_num' => 'required|int',
-                'elo' => 'required|integer',
+        $data = $request->validate([
+            'id_fide' => 'required|int',
+            'city' => 'required|string',
+            'street' => 'required|string',
+            'street_num' => 'required|int',
+            'elo' => 'required|integer',
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'surname' => 'required|string',
+            'rut' => 'required|string',
+            'v_digit' => 'required|string',
+            'phone' => 'required|string',
+            'state' => 'required|string',
 
-            ]);
+        ]);
     
-            // Create the User and Pupil
-            $user = $this->userService->createUser($data, 'pupil');
+        $pupil = new User($data);
+        $pupil->save();
     
-            return redirect()->route('pupil.show', $user->userable->id);
-        
+        return redirect()->route('pupils.show', $pupil->id)->with('success', 'Pupil created successfully');
     }
+    
 
     /**
      * Display the specified resource.
@@ -86,12 +93,19 @@ class PupilController extends Controller
             'street' => 'required|string',
             'street_num' => 'required|int',
             'elo' => 'required|integer',
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'surname' => 'required|string',
+            'rut' => 'required|string',
+            'v_digit' => 'required|string',
+            'phone' => 'required|string',
+            'state' => 'required|string',
         ]);
 
-        $pupil = Pupil::findOrFail($id);
+        $pupil = User::findOrFail($id);
         $pupil->update($data);
 
-        return redirect()->route('pupil.show', $pupil->id);
+        return redirect()->route('pupil.show', $pupil->id)->with('success', 'Pupil updated successfully');
     }
     /**
      * Remove the specified resource from storage.

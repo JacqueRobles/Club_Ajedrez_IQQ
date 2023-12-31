@@ -25,7 +25,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
+    protected $fillable = [         //ignore models player, director, partner, pupil, directive
         'name',
         'email',
         'password',
@@ -34,6 +34,13 @@ class User extends Authenticatable
         'v_digit',
         'phone',
         'state',
+        //pupil
+        'id_fide',
+        'city',                     //player    //partner
+        'street',                               //partner
+        'street_num',                           //partner
+        'elo',              //end pupil     //player
+        'inscription_date',         //partner
     ];
 
     /**
