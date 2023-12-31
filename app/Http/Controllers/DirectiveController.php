@@ -49,11 +49,11 @@ class DirectiveController extends Controller
         ]);
     
         // Use the UserService to create a new Directive and associated User
-        $directive = $this->userService->createUser($validatedData, 'directive');
-    
-        // Return a success response
-        return response()->json(['message' => 'Directive created successfully']);
-    }
+        $directive = new User($request->all());
+        $directive->save();
+        
+            return redirect()->route('directives.show', $directive->id)->with('success', 'Directive created successfully');
+    }  
 
     /**
      * Display the specified resource.
@@ -64,7 +64,7 @@ class DirectiveController extends Controller
     public function show(string $id)
     {
         // Find the directive by ID
-        $directive = Directive::find($id);
+        $directive = User::find($id);
 
         // Check if the directive exists
         if (!$directive) {
@@ -73,7 +73,7 @@ class DirectiveController extends Controller
         }
 
         // Return the directive as a response
-        return response()->json($directive);
+        return view('directives.show');
     }
     /**
      * Show the form for editing the specified resource.
@@ -84,7 +84,7 @@ class DirectiveController extends Controller
     public function edit(string $id)
     {
         // Find the directive by ID
-        $directive = Directive::find($id);
+        $directive = User::findOrFail($id);
 
         // Check if the directive exists
         if (!$directive) {
@@ -98,10 +98,10 @@ class DirectiveController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id)        //for change
     {
         // Find the directive by ID
-        $directive = Directive::find($id);
+        $directive = User::findOrFail($id);
 
         // Check if the directive exists
         if (!$directive) {
@@ -134,7 +134,7 @@ class DirectiveController extends Controller
         $directive->update($validatedData);
 
         // Return a success response
-        return response()->json(['message' => 'Directive updated successfully']);
+        return view('directives.show', $directive->id)->with('succes', 'Directive updated successfully');
     }
 
     /**
@@ -143,7 +143,7 @@ class DirectiveController extends Controller
     public function destroy(string $id)
     {
         // Find the directive by ID
-        $directive = Directive::find($id);
+        $directive = User::findOrFail($id);
 
         // Check if the directive exists
         if (!$directive) {
@@ -155,6 +155,6 @@ class DirectiveController extends Controller
         $directive->delete();
 
         // Return a success response
-        return response()->json(['message' => 'Directive deleted successfully']);
+        return view('directives.index')->with('Directive deleted successfully');
     }
 }
