@@ -69,7 +69,7 @@ class PupilController extends Controller
      */
     public function show(string $id)
     {
-        $pupil = Pupil::findOrFail($id);
+        $pupil = User::findOrFail($id);
         return view('pupil.show', compact('pupil'));
     }
 
@@ -78,7 +78,7 @@ class PupilController extends Controller
      */
     public function edit(string $id)
     {
-        $pupil = Pupil::findOrFail($id);
+        $pupil = User::findOrFail($id);
         return view('pupil.edit', compact('pupil'));
     }
 
@@ -112,7 +112,7 @@ class PupilController extends Controller
      */
     public function destroy(string $id)
     {
-        $pupil = Pupil::findOrFail($id);
+        $pupil = User::findOrFail($id);
         $pupil->delete();
 
         return redirect()->route('pupil.index');

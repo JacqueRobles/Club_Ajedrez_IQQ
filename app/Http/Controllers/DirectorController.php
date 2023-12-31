@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class DirectorController extends Controller
 {
@@ -11,7 +12,8 @@ class DirectorController extends Controller
      */
     public function index()
     {
-        //
+        $partners = User::where('role:director')->get();
+        return view('partners.index', compact('partners'));
     }
 
     /**
@@ -19,7 +21,7 @@ class DirectorController extends Controller
      */
     public function create()
     {
-        //
+        return view('directors.create');
     }
 
     /**
@@ -27,15 +29,26 @@ class DirectorController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'inscription_date' => 'required|date',
+            'city' => 'required|max:255',
+            'street' => 'required|max:255',
+            'street_num' => 'required|max:255',
+        ]);
+    
+        $director = new User($request->all());
+        $director->save();
+        
+            return redirect()->route('directors.show', $director->id)->with('success', 'Director created successfully');
+    }    
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        $director = User::findOrFail($id);
+        return view('directors.show', compact('director'));
     }
 
     /**
@@ -43,7 +56,8 @@ class DirectorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $director = User::findOrFail($id);
+        return view('directors.edit', compact('director'));
     }
 
     /**
@@ -51,7 +65,17 @@ class DirectorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255',
+        ]);
+
+        $director = User::findOrFail($id);
+        $director->name = $request->input('name');
+        $director->email = $request->input('email');
+        $director->save();
+
+        return redirect()->route('directors.index')->with('success', 'Director updated successfully');
     }
 
     /**
@@ -59,6 +83,9 @@ class DirectorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $director = User::findOrFail($id);
+        $director->delete();
+
+        return redirect()->route('directors.index')->with('success', 'Director deleted successfully');
     }
 }

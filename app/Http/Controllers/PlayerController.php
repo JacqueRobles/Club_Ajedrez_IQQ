@@ -4,22 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Player;
+use App\Models\User;
 use App\Services\UserService;
 
 class PlayerController extends Controller
 {
     protected $userService;
 
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
+    public function __construct()
+    {    
+        //$this->middleware('role:directive')->only(['create', 'store']);    //no admin
+
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $players = Player::all();
+        $players = User::where('role:player')->get();
 
         return view('players.index', compact('players'));
     }
@@ -48,17 +50,17 @@ class PlayerController extends Controller
             'age' => 'required|integer',
         ]);
 
-        // Create the User and Player
-        $user = $this->userService->createUser($data, 'player');
-
-        return redirect()->route('index', $user->userable->id);
+        $player = new User($data);
+        $player->save();
+    
+        return redirect()->route('players.show', $player->id)->with('success', 'Player created successfully');
     }
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        $player = Player::findOrFail($id);
+        $player = User::findOrFail($id);
 
         return view('players.show', compact('player'));
     }
@@ -67,7 +69,7 @@ class PlayerController extends Controller
      */
     public function edit(string $id)
     {
-        $player = Player::findOrFail($id);
+        $player = User::findOrFail($id);
 
         return view('players.edit', compact('player'));
     }
@@ -87,10 +89,10 @@ class PlayerController extends Controller
             'age' => 'required|integer',
         ]);
 
-        $player = Player::findOrFail($id);
+        $player = User::findOrFail($id);
         $player->update($data);
 
-        return redirect()->route('index', $player->id);
+        return redirect()->route('players.show', $player->id);
     }
 
     /**
@@ -98,7 +100,7 @@ class PlayerController extends Controller
      */
     public function destroy(string $id)
     {
-        $player = Player::findOrFail($id);
+        $player = User::findOrFail($id);
         $player->delete();
 
         return redirect()->route('index');
