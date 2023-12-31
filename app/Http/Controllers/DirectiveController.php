@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\UserService;
+use App\Models\User;
 use app\Models\Directive;
 
 class DirectiveController extends Controller
 {
-    protected $userService; 
-    public function __construct(UserService $userService)
+    public function __construct()
     {
-        $this->userService = $userService;
+
     
         $this->middleware(['role:directive', 'role:admin'])->only(['create', 'store', 'update', 'edit', 'destroy']);  //admin o no admin?
 
@@ -22,10 +21,10 @@ class DirectiveController extends Controller
     public function index()
     {
         // Retrieve all directives from the database
-        $directives = Directive::all();
+        $directives = User::where('role:directive')->get();
 
         // Return the directives as a response
-        return response()->json($directives);
+        return view('directives.index', compact('directives'));
     }
     /**
      * Show the form for creating a new resource.
